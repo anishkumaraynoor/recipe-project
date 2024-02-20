@@ -1,40 +1,32 @@
-import React, { useState } from 'react'
-
-
-
-
-
-import { Col, Row } from 'react-bootstrap'
-
-
+import React, { useContext, useState } from 'react'
+import { Col, Container, Row } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
-
 import { loginAPI, registerAPI } from '../services/allAPI'
-
-
+import { tokenAuthContext } from '../context/TokenAuth'
+import Home from './Home'
 
 
 function Auth({ insideRegister }) {
   return (
-    <>
-      <div style={{ height: '100vh' }} className='d-flex bg-danger align-items-center justify-content-center'>
-        <div className='container w-75'>
-          <Link to={'/'}><button>back to home</button></Link>
-          <Row style={{ margin: '20px' }} className='d-flex bg-warning align-items-center justify-content-center'>
-
-            <Col className='text-center' lg={6}>
-              <img style={{ height: '300px', padding: '50px' }} className='' src="" alt="" />
-            </Col>
-            <Col lg={6}>
-              {insideRegister ?
-                <Register></Register> :
-                <Login></Login>
-              }
-            </Col>
-
-          </Row>
-        </div>
-      </div>
+    <>      
+          <div style={{height: '100vh' }} className='back d-flex align-items-center justify-content-center'>
+            <Container>
+              <Row >
+                <Col className='text-center' lg={6}>
+                 <Home></Home>
+                </Col>
+                
+                <Col lg={6}>
+                  {insideRegister ?
+                    <Register></Register> :
+                    <Login></Login>
+                  }
+                </Col>
+              </Row>
+            </Container>
+          </div>
+        
+      
     </>
   )
 }
@@ -69,11 +61,11 @@ const Register = () => {
 
   return (
     <>
-      <h1>Register</h1>
+      <h1 className='text-primary'>Register</h1>
       <input onChange={e => setUserInput({ ...userInput, username: e.target.value })} value={userInput.username} className='form-control w-75 mt-2' placeholder='Username' type="text" />
       <input onChange={e => setUserInput({ ...userInput, email: e.target.value })} value={userInput.email} className='form-control w-75 mt-2' placeholder='Email' type="text" />
       <input onChange={e => setUserInput({ ...userInput, password: e.target.value })} value={userInput.password} className='form-control w-75 mt-2' placeholder='Password' type="text" />
-      <div onClick={handleRegister} className='btn btn-success mt-2'>Register</div>
+      <div onClick={handleRegister} className='btn btn-primary mt-2'>Register</div>
       <p>Have already an Account?... <Link to={'/login'}>Login</Link></p>
     </>
 
@@ -81,6 +73,7 @@ const Register = () => {
 }
 
 const Login = () => {
+  const {isAuthorized, setIsAuthorized} = useContext(tokenAuthContext)
   const navigate = useNavigate()
   const [userInput, setUserInput] = useState({
     email: "", password: ""
@@ -95,6 +88,7 @@ const Login = () => {
       if (result.status === 200) {
         sessionStorage.setItem("username", result.data.existingUser.username)
         sessionStorage.setItem("token", result.data.token)
+        setIsAuthorized(true)
         setUserInput({ email: "", password: "" })
         navigate('/recipes')
       } else {
@@ -109,10 +103,10 @@ const Login = () => {
 
   return (
     <>
-      <h1>Login</h1>
+      <h1 className='text-primary'>Login</h1>
       <input onChange={e => setUserInput({ ...userInput, email: e.target.value })} value={userInput.email} className='form-control w-75 mt-2' placeholder='Email' type="text" />
       <input onChange={e => setUserInput({ ...userInput, password: e.target.value })} value={userInput.password} className='form-control w-75 mt-2' placeholder='Password' type="text" />
-      <div onClick={handleLogin} className='btn btn-success mt-2'>Login</div>
+      <div onClick={handleLogin} className='btn btn-primary mt-2'>Login</div>
       <p>Not Registered Yet?... <Link to={'/register'}>Register</Link></p>
     </>
   )

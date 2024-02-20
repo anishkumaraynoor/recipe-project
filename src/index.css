@@ -14,7 +14,7 @@
     background: linear-gradient(-45deg, #571845, #c70039);
     display: flex;
     flex-direction: column;
-    padding: 20px 5px 0 20px;
+    padding: 20px 5px 15px 20px;
     z-index: 100;
 
 }
@@ -41,11 +41,34 @@
 .content{
     position: relative;
     height: calc(100% - 150px);
-    align-items: center;
-    justify-content: center;
+    
     top: 70px;
     left: 350px;
-    width: calc(100% - 350px);
-    background: yellowgreen;
     display: flex;
+}
+
+.content2{
+    position: relative;
+    height: calc(100% - 150px);
+    
+    
+    width: calc(100% - 350px);
+    /* background: rgb(197, 220, 247); */
+    
+}
+
+.back{
+    background-image: url(./assets/back.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.ts{
+    text-shadow: 2px 2px 4px #000000;
+}
+.instructions{
+    background-color: #cfdffa;
+}
+.description{
+    font-size: x-small;
+    line-height: 100%;
 }

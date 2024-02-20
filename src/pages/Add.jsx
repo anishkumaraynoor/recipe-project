@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 
 
@@ -7,8 +7,10 @@ import { Container } from 'react-bootstrap'
 import images from '../assets/images.png'
 import { addRecipeAPI } from '../services/allAPI'
 import { useNavigate } from 'react-router-dom'
+import { addResponseContext } from '../context/ContextShare'
 
 function Add() {
+  const {addResponse, setAddResponse} = useContext(addResponseContext)
   const navigate = useNavigate()
   const [imageFileStatus, setImageFileStatus] = useState(false)
   const [preview, setPreview] = useState("")
@@ -19,6 +21,7 @@ function Add() {
   const handleCancel = ()=>{
     setRecipeData({recipename:"", description:"", ingredients:"", instructions:"", cookingtime:"", recipeimage:""})
     setPreview(images)
+    navigate('/recipes')
   }
 
   const handleRecipeUpload = async()=>{
@@ -45,8 +48,7 @@ function Add() {
         const result = await addRecipeAPI(reqBody, reqHeader)
         console.log(result);
         if(result.status===200){
-          alert("added successfully")
-          console.log(result.data);
+          setAddResponse(result.data)
           navigate('/recipes')
         }else{
           alert(result.response.data)
@@ -93,13 +95,13 @@ function Add() {
                   <input onChange={e=>setRecipeData({...recipeData, recipename:e.target.value})} value={recipeData.recipename} className='border rounded p-2 w-75' placeholder='Recipe Name' type="text" name="" id="" />
                 </div>
                 <div className='mb-1'>
-                <textarea onChange={e=>setRecipeData({...recipeData, description:e.target.value})} value={recipeData.description} className='border rounded p-2 w-75' placeholder='Description' cols="30" rows="3"></textarea>
+                <textarea onChange={e=>setRecipeData({...recipeData, description:e.target.value})} value={recipeData.description} className='border rounded p-2 w-75' placeholder='Description' cols="30" rows="2"></textarea>
                 </div>
                 <div className='mb-1'>
-                  <textarea onChange={e=>setRecipeData({...recipeData, ingredients:e.target.value})} value={recipeData.ingredients} className='border rounded p-2 w-75' placeholder='Ingredients' cols="30" rows="7"></textarea>
+                  <textarea onChange={e=>setRecipeData({...recipeData, ingredients:e.target.value})} value={recipeData.ingredients} className='border rounded p-2 w-75' placeholder='Ingredients' cols="30" rows="3"></textarea>
                 </div>
                 <div className='mb-1'>
-                  <input onChange={e=>setRecipeData({...recipeData, instructions:e.target.value})} value={recipeData.instructions} className='border rounded p-2 w-75' placeholder='Instructions' type="text" name="" id="" />
+                  <textarea onChange={e=>setRecipeData({...recipeData, instructions:e.target.value})} value={recipeData.instructions} className='border rounded p-2 w-75' placeholder='Instructions' cols="30" rows="3"></textarea>
                 </div>
                 <div className='mb-1'>
                   <input onChange={e=>setRecipeData({...recipeData, cookingtime:e.target.value})} value={recipeData.cookingtime} className='border rounded p-2 w-75' placeholder='Coocking Time (in Minutes)' type="text" name="" id="" />

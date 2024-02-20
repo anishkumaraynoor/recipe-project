@@ -1,11 +1,10 @@
 import React from 'react'
-import { Col } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
 
 
 
 
 
+import icon from '../assets/icon.jpg'
 
 
 
@@ -13,16 +12,16 @@ import { Link } from 'react-router-dom'
 function Home() {
   return (
     <>
-<div style={{ height: '100%' }} className='bg-warning d-flex justify-content-center align-items-center'>
-        <div className='row w-100'>
-          <Col style={{padding:'10%'}} lg={6}>
-              <h1>Project Fair</h1>
-              <p>One stop destination for all software development projects where user can add and manage their projects as well as access all projects available in our website... What are you waiting for?!!!</p>
-              <Link to={'/login'}><button className='btn btn-info'>Explore</button></Link>
-          </Col>
-          <Col className='d-flex justify-content-center align-items-center' lg={6}>
-            <img style={{height:'70%'}} src="" alt="" />
-          </Col>
+<div className='d-flex justify-content-center align-items-center'>
+        <div className='w-100'>
+          
+              <h1 className='ts fw-bold text-white'><img height={80} style={{borderRadius:'50%'}} src={icon} alt="" />FoodsApp</h1>
+              <p className='px-5'>Skinny People are easy to kidnap.</p>
+              <p className='px-5'>Eat lots...</p>
+              
+              
+         
+          
         </div>
       </div>
 
