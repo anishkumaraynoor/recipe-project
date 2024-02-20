@@ -203,18 +203,20 @@ function Recipes() {
   {/* ............................................................... */}
             <div style={{height:'200px', border:'black'}} className='bg-success'>
            <h4 className='text-center text-white'>Your Recipes</h4>
-  <div className="slider-container">
+  <div className="slider-container mx-5">
         <Slider {...settings}>
-          {userRecipes?.length>0 && userRecipes.map((userRecipe, index)=>(
-            <div  >
-              <div key={index} onClick={e => userShow(userRecipe)}>
-              <div className='d-flex align-items-center justify-content-center'><img className='text-center' width={100} height={70} src={`${SERVER_URL}/uploads/${userRecipe.recipeimage}`} alt="" /></div>
-              <h6 className='text-center text-white'>{userRecipe.recipename}</h6>
+          
+            {userRecipes?.length>0 && userRecipes.map((userRecipe, index)=>(
+              <div  >
+                <div key={index} onClick={e => userShow(userRecipe)}>
+                <div className='d-flex align-items-center justify-content-center'><img className='text-center' width={100} height={70} src={`${SERVER_URL}/uploads/${userRecipe.recipeimage}`} alt="" /></div>
+                <h6 className='text-center text-white'>{userRecipe.recipename}</h6>
+                </div>
               </div>
-            </div>
-            
-          ))
-          }
+              
+            ))
+            }
+          
           
         </Slider>
       </div>
