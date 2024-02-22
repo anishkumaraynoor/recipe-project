@@ -105,7 +105,7 @@ const Login = () => {
     <>
       <h1 className='text-primary'>Login</h1>
       <input onChange={e => setUserInput({ ...userInput, email: e.target.value })} value={userInput.email} className='form-control w-75 mt-2' placeholder='Email' type="text" />
-      <input onChange={e => setUserInput({ ...userInput, password: e.target.value })} value={userInput.password} className='form-control w-75 mt-2' placeholder='Password' type="text" />
+      <input onChange={e => setUserInput({ ...userInput, password: e.target.value })} value={userInput.password} className='form-control w-75 mt-2' placeholder='Password' type="password" />
       <div onClick={handleLogin} className='btn btn-primary mt-2'>Login</div>
       <p>Not Registered Yet?... <Link to={'/register'}>Register</Link></p>
     </>
